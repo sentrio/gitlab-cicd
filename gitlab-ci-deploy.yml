@@ -1,4 +1,4 @@
-.sentrioDeployment:
+.sentrio_deployment:
   image: curlimages/curl
   script:
     - |
