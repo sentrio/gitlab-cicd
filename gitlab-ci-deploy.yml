@@ -1,3 +1,0 @@
-.deploy_to_env:
-  image: curlimages/curl
-  script: echo ""
