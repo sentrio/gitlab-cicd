@@ -6,4 +6,3 @@
           echo "FATAL: you must set CLIENT_ID, CLIENT_SECRET, PROJECT_ID, APPLICATION_NAME, APPLICATION_VERSION and ENVIRONMENT variables"
           exit 1
       fi  
-    - curl -k -U "${CLIENT_ID}:${CLIENT_SECRET}" -X POST 'https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/deployments' -v -d '{"projectId": "${PROJECT_ID}", "release": {"application": "${APPLICATION_NAME}","version" : "${APPLICATION_VERSION}"}, "tasks": [], "dateTime": "2022-09-15T18:57:00+01:00", "environment": "${ENVIRONMENT}", "metricSource": "AUTOMATION_TOOL"}'
