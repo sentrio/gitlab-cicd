@@ -23,6 +23,7 @@
     - echo $commits
     - taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
     - echo $taskIds
+    - echo hey
     - json="{\"projectId\":\"$PROJECT_ID\",\"release\":{\"application\":\"$APPLICATION_NAME\",\"version\":\"$APPLICATION_VERSION\"},\"tasks\":["
     - |
       oldIFS="$IFS"
