@@ -34,9 +34,10 @@
       IFS="$oldIFS"
       linesLength=${#lines[@]}
       echo $linesLength
-      for i in ${!lines[@]}; do
-        json=$json{\"taskId\":\"$n\",\"taskType\":\"BUG\",\"labels\":[]}
-        if [[ $linesLenght -gt 1 ]]
+      
+      for ((i = 0; i < $linesLength; ++i)); do
+        json=$json{\"taskId\":\"${lines[$i]}\",\"taskType\":\"BUG\",\"labels\":[]}
+        if [[ $linesLenght -gt 1 && $i -ne $linesLenght+1 ]]
           json=$json,
         fi
       done
