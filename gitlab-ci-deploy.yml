@@ -25,9 +25,18 @@
     - echo $taskIds
     - json="{\"projectId\":\"$PROJECT_ID\",\"release\":{\"application\":\"$APPLICATION_NAME\",\"version\":\"$APPLICATION_VERSION\"},\"tasks\":["
     - |
-      for n in $taskIds;
-      do
-          json=$json{\"taskId\":\"$n\",\"taskType\":\"BUG\",\"labels\":[]},
+      oldIFS="$IFS"
+      IFS='
+      '
+      IFS=${IFS:0:1} # this is useful to format your code with tabs
+      lines=( $taskIds )
+      IFS="$oldIFS"
+      linesLength=${#lines[@]}
+      for i in ${!lines[@]}; do
+        json=$json{\"taskId\":\"$n\",\"taskType\":\"BUG\",\"labels\":[]}
+        if [[ $linesLenght -gt 1 ]]
+          json=$json,
+        fi
       done
     - json=$json],\"dateTime\":\"2022-09-15T18:57:00+01:00\",\"environment\":\"$ENVIRONMENT\",\"metricSource\":\"AUTOMATION_TOOL\"}
     - echo $json
