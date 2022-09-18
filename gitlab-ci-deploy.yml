@@ -31,13 +31,11 @@
       IFS=${IFS:0:1} # this is useful to format your code with tabs
       lines=( $taskIds )
       echo $lines
-      IFS="$oldIFS"
-      linesLength=${#lines[@]}
-      echo $linesLength
-      
-      for ((i = 0; i < $linesLength; ++i)); do
+      IFS="$oldIFS"  
+      for ((i = 0; i < ${#lines[@]}; ++i)); do
         json=$json{\"taskId\":\"${lines[$i]}\",\"taskType\":\"BUG\",\"labels\":[]}
         if [[ $linesLength -gt 1 ]]
+        then
           json=$json,
         fi
       done
