@@ -37,7 +37,7 @@
       
       for ((i = 0; i < $linesLength; ++i)); do
         json=$json{\"taskId\":\"${lines[$i]}\",\"taskType\":\"BUG\",\"labels\":[]}
-        if [[ $linesLength -gt 1 && $i -ne $linesLenght+1 ]]
+        if [[ $linesLength -gt 1 ]]
           json=$json,
         fi
       done
