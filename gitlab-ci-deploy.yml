@@ -46,6 +46,6 @@
           json=$json,
         fi
       done
-    - json=$json],\"dateTime\":\"2022-09-15T18:57:00+01:00\",\"environment\":\"$ENVIRONMENT\",\"metricSource\":\"AUTOMATION_TOOL\"}
+    - json=$json],\"dateTime\":\"$(date +"%Y-%m-%dT%H:%M:%S%z")\",\"environment\":\"$ENVIRONMENT\",\"metricSource\":\"AUTOMATION_TOOL\"}
     - echo $json
     - curl -X POST -H 'Content-Type:application/json' -k -v -u $CLIENT_ID:$CLIENT_SECRET 'https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/deployments' -d "$json"
