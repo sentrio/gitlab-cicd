@@ -28,7 +28,7 @@
           taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
       fi
     - echo "Found taskIds:$taskIds"
-    - json="{\"projectId\":\"$PROJECT_ID\",\"release\":{\"application\":\"$APPLICATION_NAME\",https://github.com/sentrio/gitlab-cicdversion\":\"$APPLICATION_VERSION\"},\"tasks\":["
+    - json="{\"projectId\":\"$PROJECT_ID\",\"release\":{\"application\":\"$APPLICATION_NAME\",\"version\":\"$APPLICATION_VERSION\"},\"tasks\":["
     - |
       oldIFS="$IFS"
       IFS='
