@@ -22,7 +22,7 @@
       fi  
     - echo $commits
     - |
-      if [[ test -z "$commits" ]]; then
+      if [[ -z "$commits" ]]; then
           taskIds=""
       else
           taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
