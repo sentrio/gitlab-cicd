@@ -1,7 +1,7 @@
 # gitlab-cicd
 Gitlab CICD integration
 
-CICD Integration requires de following variables:
+CICD Deployment Frequency Integration requires the following variables:
 
 * CLIENT_ID: SENTRIO client id
 * CLIENT_SECRET: SENTRIO client secret
@@ -31,6 +31,6 @@ deploy_dev:
   variables:
     PROJECT_ID: XX
     APPLICATION_NAME: "gitlab-app"
-    APPLICATION_VERSION: 1.0.0-SNAPSHOT
+    APPLICATION_VERSION: "1.0.0-SNAPSHOT"
     ENVIRONMENT: "dev"
 ```
