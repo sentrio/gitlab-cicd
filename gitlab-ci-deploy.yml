@@ -22,9 +22,12 @@
       fi  
     - echo "Commit messages:$commits"
     - |
+      echo here
       if [[ -z "$commits" ]]; then
+          echo here2
           taskIds=""
       else
+          echo here3
           taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
       fi
     - echo "Found taskIds:$taskIds"
