@@ -40,7 +40,8 @@
       IFS="$oldIFS"  
       for ((i = 0; i < ${#lines[@]}; ++i)); do
         json=$json{\"taskId\":\"${lines[$i]}\",\"taskType\":\"BUG\",\"labels\":[]}
-        echo "$(($i+1))"
+        echo "i plus one: $(($i+1))"
+        echo "total: ${#lines[@]}"
         if [[ $linesLength -gt 1 && $(($i+1)) -lt ${#lines[@]} ]]
         then
           json=$json,
