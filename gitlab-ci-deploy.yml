@@ -28,6 +28,8 @@
           taskIds=""
       else
           echo here3
+          echo $commits
+          echo $(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
           taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
       fi
     - echo "Found taskIds:$taskIds"
