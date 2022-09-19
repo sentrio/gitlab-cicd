@@ -28,7 +28,7 @@
           taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
       fi
     - echo $taskIds
-    - json="{\"projectId\":\"$PROJECT_ID\",\"release\":{\"application\":\"$APPLICATION_NAME\",\"version\":\"$APPLICATION_VERSION\"},\"tasks\":["
+    - json="{\"projectId\":\"$PROJECT_ID\",\"release\":{\"application\":\"$APPLICATION_NAME\",https://github.com/sentrio/gitlab-cicdversion\":\"$APPLICATION_VERSION\"},\"tasks\":["
     - |
       oldIFS="$IFS"
       IFS='
@@ -42,7 +42,7 @@
         json=$json{\"taskId\":\"${lines[$i]}\",\"taskType\":\"BUG\",\"labels\":[]}
         echo "i plus one: $(($i+1))"
         echo "total: ${#lines[@]}"
-        if [[ $linesLength -gt 1 && $(($i+1)) -lt ${#lines[@]} ]]
+        if [[ ${#lines[@]} -gt 1 && $(($i+1)) -lt ${#lines[@]} ]]
         then
           json=$json,
         fi
