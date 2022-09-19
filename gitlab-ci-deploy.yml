@@ -14,20 +14,20 @@
     - |
       if [[ "$CI_COMMIT_BEFORE_SHA" == "0000000000000000000000000000000000000000" ]]
       then
-          echo Here
+          echo "No previous commit info"
           commits=$(git log --pretty=format:%s --no-merges $CI_COMMIT_SHA..$CI_COMMIT_SHA)
       else
-          echo Here2
+          echo "Getting commits"
           commits=$(git log --pretty=format:%s --no-merges $CI_COMMIT_BEFORE_SHA..$CI_COMMIT_SHA)
       fi  
-    - echo $commits
+    - echo "Commit messages:$commits"
     - |
       if [[ -z "$commits" ]]; then
           taskIds=""
       else
           taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
       fi
-    - echo $taskIds
+    - echo "Found taskIds:$taskIds"
     - json="{\"projectId\":\"$PROJECT_ID\",\"release\":{\"application\":\"$APPLICATION_NAME\",https://github.com/sentrio/gitlab-cicdversion\":\"$APPLICATION_VERSION\"},\"tasks\":["
     - |
       oldIFS="$IFS"
@@ -35,13 +35,9 @@
       '
       IFS=${IFS:0:1} # this is useful to format your code with tabs
       lines=( $taskIds )
-      echo "lines: $lines"
-      echo "length: ${#lines[@]}"
       IFS="$oldIFS"  
       for ((i = 0; i < ${#lines[@]}; ++i)); do
         json=$json{\"taskId\":\"${lines[$i]}\",\"taskType\":\"BUG\",\"labels\":[]}
-        echo "i plus one: $(($i+1))"
-        echo "total: ${#lines[@]}"
         if [[ ${#lines[@]} -gt 1 && $(($i+1)) -lt ${#lines[@]} ]]
         then
           json=$json,
