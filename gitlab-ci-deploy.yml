@@ -21,8 +21,12 @@
           commits=$(git log --pretty=format:%s --no-merges $CI_COMMIT_BEFORE_SHA..$CI_COMMIT_SHA)
       fi  
     - echo $commits
-    - echo hey1
-    - taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
+    - |
+      if [[ test -z "$commits" ]]; then
+          taskIds=""
+      else
+          taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+')
+      fi
     - echo hey2
     - echo $taskIds
     - echo hey3
