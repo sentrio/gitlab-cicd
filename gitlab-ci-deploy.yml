@@ -1,4 +1,6 @@
 .sentrio_deployment:
+  inherit:
+    default: false
   image: curlimages/curl
   script:
     - |
