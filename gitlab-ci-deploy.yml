@@ -2,8 +2,8 @@
   image: sentrio/gitlab-ci-base
   script:
     - |
-      if [[ -z "CLIENT_ID" || -z "CLIENT_SECRET" || -z "PROJECT_ID" || -z "APPLICATION_NAME" || -z "APPLICATION_VERSION" || -z "ENVIRONMENT" ]]; then
-          echo "FATAL: you must set CLIENT_ID, CLIENT_SECRET, PROJECT_ID, APPLICATION_NAME, APPLICATION_VERSION and ENVIRONMENT variables"
+      if [[ -z "SENTRIO_CLIENT_ID" || -z "SENTRIO_CLIENT_SECRET" || -z "PROJECT_ID" || -z "APPLICATION_NAME" || -z "APPLICATION_VERSION" || -z "ENVIRONMENT" ]]; then
+          echo "FATAL: you must set SENTRIO_CLIENT_ID, SENTRIO_CLIENT_SECRET, PROJECT_ID, APPLICATION_NAME, APPLICATION_VERSION and ENVIRONMENT variables"
           exit 1
       fi  
     - echo $CI_PROJECT_ID
@@ -42,4 +42,4 @@
     - 'currentDate=$(date +"%Y-%m-%dT%H:%M:%S%:z")'
     - 'json=$(echo $json | jq ''. += {"dateTime": "''$currentDate''","environment":"''$ENVIRONMENT''","metricSource":"AUTOMATION_TOOL"}'')'
     - echo "JSON:$json"
-    - curl -X POST -H 'Content-Type:application/json' -k -v -u $CLIENT_ID:$CLIENT_SECRET 'https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/deployments' -d "$json"
+    - curl -X POST -H 'Content-Type:application/json' -k -v -u $SENTRIO_CLIENT_ID:$SENTRIO_CLIENT_SECRET 'https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/deployments' -d "$json"
