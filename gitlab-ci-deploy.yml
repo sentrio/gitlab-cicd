@@ -39,9 +39,9 @@
       lines=( $taskIds )
       IFS="$oldIFS"  
       for ((i = 0; i < ${#lines[@]}; ++i)); do
-        json=$(echo $json | jq ''.tasks += {"taskId":"''${lines[$i]}''","taskType":"BUG","labels":[]})
+        'json=$(echo $json | jq ''.tasks += {"taskId":"''${lines[$i]}''","taskType":"BUG","labels":[]})'
       done
     - currentDate=$(date +"%Y-%m-%dT%H:%M:%S%:z")
-    - json=$(echo $json | jq ''. += "dateTime": "''$currentDate''","environment":"''$ENVIRONMENT''","metricSource":"AUTOMATION_TOOL"})
+    - 'json=$(echo $json | jq ''. += "dateTime": "''$currentDate''","environment":"''$ENVIRONMENT''","metricSource":"AUTOMATION_TOOL"})'
     - echo "JSON:$json"
     - curl -X POST -H 'Content-Type:application/json' -k -v -u $CLIENT_ID:$CLIENT_SECRET 'https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/deployments' -d "$json"
