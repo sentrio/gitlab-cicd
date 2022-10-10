@@ -3,8 +3,8 @@ Gitlab CICD integration
 
 CICD Deployment Frequency Integration requires the following variables:
 
-* CLIENT_ID: SENTRIO client id
-* CLIENT_SECRET: SENTRIO client secret
+* SENTRIO_CLIENT_ID: SENTRIO client id
+* SENTRIO_CLIENT_SECRET: SENTRIO client secret
 * PROJECT_ID: The Jira project id associated to this applications
 * APPLICATION_NAME: the application name (generally the artifactId)
 * APPLICATION_VERSION: the application version
