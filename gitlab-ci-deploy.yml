@@ -46,6 +46,6 @@
       IFS="$oldIFS"  
       echo "here5"      
     - 'currentDate=$(date +"%Y-%m-%dT%H:%M:%S%:z")'
-    - 'json=$(echo $json | jq ''. += {"dateTime": "''$currentDate''","environment":"''$ENVIRONMENT''","metricSource":"AUTOMATION_TOOL"})'
+    - 'json=$(echo $json | jq ''. += {"dateTime": "''$currentDate''","environment":"''$ENVIRONMENT''","metricSource":"AUTOMATION_TOOL"}'')'
     - echo "JSON:$json"
     - curl -X POST -H 'Content-Type:application/json' -k -v -u $CLIENT_ID:$CLIENT_SECRET 'https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/deployments' -d "$json"
