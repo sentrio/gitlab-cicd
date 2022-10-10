@@ -1,7 +1,5 @@
 .sentrio_deployment:
-  inherit:
-    default: false
-  image: curlimages/curl
+  image: sentrio/gitlab-ci-base
   script:
     - |
       if [[ -z "CLIENT_ID" || -z "CLIENT_SECRET" || -z "PROJECT_ID" || -z "APPLICATION_NAME" || -z "APPLICATION_VERSION" || -z "ENVIRONMENT" ]]; then
