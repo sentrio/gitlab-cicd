@@ -43,7 +43,10 @@
       echo "here3"      
       lines=($taskIds)
       echo "here4"
-      IFS="$oldIFS"  
+      IFS="$oldIFS" 
+      for ((i = 0; i < ${#lines[@]}; ++i)); do
+        'json=$(echo $json | jq ''.tasks += {"taskId":"''${lines[$i]}''","taskType":"BUG","labels":[]}'')'
+      done
       echo "here5"      
     - 'currentDate=$(date +"%Y-%m-%dT%H:%M:%S%:z")'
     - 'json=$(echo $json | jq ''. += {"dateTime": "''$currentDate''","environment":"''$ENVIRONMENT''","metricSource":"AUTOMATION_TOOL"}'')'
