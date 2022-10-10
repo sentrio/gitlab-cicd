@@ -55,7 +55,7 @@ In order to notify Sonar Qa metrics  to the SENTRIO VSM platform:
 
 ```
 include:
-  - remote: 'https://github.com/sentrio/gitlab-qa-sonarqube/main/gitlab-qa-sonarqube.yml'
+  - remote: 'https://raw.githubusercontent.com/sentrio/gitlab-cicd/main/gitlab-ci-sonarqube.yml'
 ```
 
 2. Integrate the .sentrio_sonarqube script calling into your existing deployment stages
