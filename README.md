@@ -19,18 +19,15 @@ include:
   - remote: 'https://raw.githubusercontent.com/sentrio/gitlab-cicd/main/gitlab-ci-deploy.yml'
 ```
 
-2. Integrate the .sentrio_deployment call into your existing deployment stages
-
+2. add a sentrio_deployment_ENV call to your pipeline referencing the `.sentrio_deployment` job, e.g.:
+ 
 ```
-deploy_dev:
+sentrio_deploy_dev:
   stage: deploy
-  script:
-    - echo "Deploying to dev"
-    - echo "Deployed to dev"
-    - !reference [.sentrio_deployment, script]
+  extends: .sentrio_deployment
   variables:
     PROJECT_ID: XX
     APPLICATION_NAME: "gitlab-app"
-    APPLICATION_VERSION: "1.0.0-SNAPSHOT"
-    ENVIRONMENT: "dev"
+    APPLICATION_VERSION: 1.0.0-SNAPSHOT
+    ENVIRONMENT: "dev"  
 ```
