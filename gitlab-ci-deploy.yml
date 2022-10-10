@@ -29,7 +29,7 @@
       else
           taskIds=$(echo $commits | grep -Eo '[A-Z]+-[0-9]+' || test $? = 1;)
       fi
-    - "echo "Found taskIds: '$taskIds'"
+    - echo "Found taskIds:$taskIds"
     - json="{\"projectId\":\"$PROJECT_ID\",\"release\":{\"application\":\"$APPLICATION_NAME\",\"version\":\"$APPLICATION_VERSION\"},\"tasks\":[]}"
     - |
       oldIFS="$IFS"
