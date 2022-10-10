@@ -1,0 +1,34 @@
+.sentrio_sonarqube:
+  image: sentrio/gitlab-ci-base
+  script:
+    - |
+      check_env_var() {
+      message=$1
+      var=$2
+
+      if [ -z ${var} ]
+      then
+        echo "${message}"
+        exit 1
+      fi    
+      }
+    - |
+      check_env_var 'SONAR_BASE_URL enviroment variable is mandatory' $SONAR_BASE_URL
+      check_env_var "SONAR_TOKEN enviroment variable  is mandatoryo" $SONAR_TOKEN
+      check_env_var "SONAQUBE_PROJECT_ID enviroment variable  is mandatory" $SONAQUBE_PROJECT_ID
+      check_env_var "SENTRIO_CLIENT_ID enviroment variable  is mandatory" $SENTRIO_CLIENT_ID
+      check_env_var "SENTRIO_CLIENT_SECRET enviroment variable  is mandatory" $SENTRIO_CLIENT_SECRET
+      check_env_var "BRANCH enviroment variable  is mandatory" $BRANCH
+      check_env_var "PROJECT_ID enviroment variable is mandatory " $PROJECT_ID
+
+    - echo Get meassures
+    - 'sonarResponseBody=$(curl -k -s -u ${SONAR_TOKEN}: ${SONAR_BASE_URL}/api/measures/component?component=${SONAQUBE_PROJECT_ID}\&metricKeys=bugs,vulnerabilities,code_smells,coverage,line_coverage,duplicated_lines_density,ncloc,sqale_index,sqale_rating,complexity,reliability_remediation_effort,reliability_rating,security_remediation_effort,security_rating&branch=${branch})'
+    - 'currentDate=$(date -u +"%Y-%m-%dT%H:%M:%S.%N%:z")'
+    - 'sentrioSonarMetricsBranch=$(echo $sonarResponseBody | jq ''.component += { "branch": "''${BRANCH}''" }'')'
+    - 'sentrioSonarMetrics=$(echo $sentrioSonarMetricsBranch| jq ''. += { "submittedAt" : "''$currentDate''", "projectId" : "''$PROJECT_ID''", "metadata": {},"analysisUrl": "''${SONAR_BASE_URL}''/dashboard?id=''${SONAQUBE_PROJECT_ID}''" }'')'
+    - echo Send metrics to Sentrio
+    - 'sentriorResponseBody=$(curl POST -v -H ''Content-Type:application/json'' -k -s -u $SENTRIO_CLIENT_ID:$SENTRIO_CLIENT_SECRET ''https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/projectqa/sonarqube'' -d "$sentrioSonarMetrics" )'
+    - echo Send metrics process was succesfull
+
+
+
