@@ -27,7 +27,7 @@
     - 'sentrioSonarMetricsBranch=$(echo $sonarResponseBody | jq ''.component += { "branch": "''${BRANCH}''" }'')'
     - 'sentrioSonarMetrics=$(echo $sentrioSonarMetricsBranch| jq ''. += { "submittedAt" : "''$currentDate''", "projectId" : "''$PROJECT_ID''", "metadata": {},"analysisUrl": "''${SONAR_BASE_URL}''/dashboard?id=''${SONAQUBE_PROJECT_ID}''" }'')'
     - echo Send metrics to Sentrio
-    - 'x1=$(curl -o /dev/null -s -w  "%{http_code}\n" -H "accept: application/json -X POST -u $SENTRIO_CLIENT_ID:$SENTRIO_CLIENT_SECRET ''https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/projectqa/sonarqube'' -d "$sentrioSonarMetrics)"'
+    - 'x1=$(curl -o /dev/null -s -w  "%{http_code}\n" -H ''accept: application/json'' -u $SENTRIO_CLIENT_ID:$SENTRIO_CLIENT_SECRET -X POST ''https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/projectqa/sonarqube'' -d "$sentrioSonarMetrics)"'
     - echo "x1=$x1"
     - 'sentriorResponseCode=$(curl POST -s -o /dev/null -w "%{http_code}"  -H ''Content-Type:application/json'' -u $SENTRIO_CLIENT_ID:$SENTRIO_CLIENT_SECRET ''https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/projectqa/sonarqube'' -d "$sentrioSonarMetrics" )'
     - jsonResponseBodyRegularExpression='*\}'
