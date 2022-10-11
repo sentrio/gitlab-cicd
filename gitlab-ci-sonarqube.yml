@@ -28,7 +28,6 @@
     - 'sentrioSonarMetrics=$(echo $sentrioSonarMetricsBranch| jq ''. += { "submittedAt" : "''$currentDate''", "projectId" : "''$PROJECT_ID''", "metadata": {},"analysisUrl": "''${SONAR_BASE_URL}''/dashboard?id=''${SONAQUBE_PROJECT_ID}''" }'')'
     - echo Send metrics to Sentrio
     - 'sentrioResponseCode=$(curl -o /dev/null -s -w  "%{http_code}\n" -H ''Content-Type:application/json'' -u $SENTRIO_CLIENT_ID:$SENTRIO_CLIENT_SECRET -X POST ''https://platform.sentrio.io/metrics-ingestor/api/v1/metrics/projectqa/sonarqube'' -d "$sentrioSonarMetrics")'
-    - echo "sentrioResponseCode=$sentrioResponseCode"
     - |- 
             if [[ $sentrioResponseCode == "201" ]]; then
                 echo Send Qa metrics process was succesfull.
