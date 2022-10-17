@@ -40,13 +40,13 @@ sentrio_deploy_dev:
 CICD  Sonar QA Integration requires the following environment variables:
 
 
+* SENTRIO_CLIENT_ID: Sentrio client id
+* SENTRIO_CLIENT_SECRET: Sentrio access token
 * SONAR_BASE_URL: Sonar base url
 * SONAR_TOKEN: Sonar access token
-* SONAQUBE_PROJECT_ID: Sonar Project Id
-* SENTRIO_CLIENT_ID: Sentrio client id
-* SENTRIO_TOKEN: Sentrio access token
+* SONAR_PROJECT_ID: Sonar Project Id
 * BRANCH: branch name
-* PROJECT_ID: project Id
+* PROJECT_ID: The Jira project id associated to this application
 
 
 In order to notify Sonar Qa metrics  to the SENTRIO VSM platform:
@@ -65,9 +65,9 @@ sentrio_qa:
   stage: test
   extends: .sentrio_sonarqube
   variables:
-    SONAR_BASE_URL: https://SONARQUBE_URL
+    SONAR_BASE_URL: https://SONAR_URL
     SONAR_TOKEN : SONAR_TOKEN
-    SONAQUBE_PROJECT_ID: SONAR_PROJECT_ID
+    SONAR_PROJECT_ID: SONAR_PROJECT_ID
     BRANCH: "BRANCH"
     PROJECT_ID: "JIRACODE"  
 ```
