@@ -61,18 +61,13 @@ include:
 2. Integrate the .sentrio_sonarqube script calling into your existing deployment stages
 
 ```
-deploy_qa:
-  stage: deploy
-  script:
-    - echo "Qa to dev"
-    - !reference [.sentrio_sonarqube, script]
+sentrio_qa:
+  stage: test
+  extends: .sentrio_sonarqube
   variables:
-    SONAR_BASE_URL: https://sonarqube.com
-    SONAR_TOKEN : e14273163ec64026ae243cf09c1893d1f612313133
-    SONAQUBE_PROJECT_ID: sonar_project_id
-    SENTRIO_CLIENT_ID: aRp4Rasda
-    SENTRIO_TOKEN: asdasdqwrfsdfPaaa
-    BRANCH: "develop"
-    PROJECT_ID: "PI"
-  
+    SONAR_BASE_URL: https://SONARQUBE_URL
+    SONAR_TOKEN : SONAR_TOKEN
+    SONAQUBE_PROJECT_ID: SONAR_PROJECT_ID
+    BRANCH: "BRANCH"
+    PROJECT_ID: "JIRACODE"  
 ```
