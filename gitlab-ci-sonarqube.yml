@@ -22,7 +22,7 @@
       check_env_var "PROJECT_ID enviroment variable is mandatory " $PROJECT_ID
 
     - echo Get meassures
-    - 'sonarResponseBody=$(curl -v -k -u ${SONAR_TOKEN}: ${SONAR_BASE_URL}/api/measures/component?branch=${BRANCH}&amp;component=${SONAR_PROJECT_ID}\&metricKeys=bugs,vulnerabilities,code_smells,coverage,line_coverage,duplicated_lines_density,ncloc,sqale_index,sqale_rating,complexity,reliability_remediation_effort,reliability_rating,security_remediation_effort,security_rating)'
+    - 'sonarResponseBody=$(curl -v -k -u ${SONAR_TOKEN}: ${SONAR_BASE_URL}/api/measures/component?component=${SONAR_PROJECT_ID}\&metricKeys=bugs,vulnerabilities,code_smells,coverage,line_coverage,duplicated_lines_density,ncloc,sqale_index,sqale_rating,complexity,reliability_remediation_effort,reliability_rating,security_remediation_effort,security_rating\&branch=${BRANCH})'
     - 'currentDate=$(date -u +"%Y-%m-%dT%H:%M:%S.%N%:z")'
     - echo "response body -> $sonarResponseBody" 
     - 'sentrioSonarMetricsBranch=$(echo $sonarResponseBody | jq ''.component += { "branch": "''${BRANCH}''" }'')'
